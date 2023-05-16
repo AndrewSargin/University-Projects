@@ -7,6 +7,5 @@ void MenuFile(struct autoshow*&, struct autoshow*&, FILE *&);
 void MenuEdit(struct refbook*&, struct refbook*&, struct refbook*&, struct autoshow*&, struct autoshow*&, FILE *&, FILE *&);
 void MenuRefBook(struct refbook*&, struct refbook*&, struct refbook*&, FILE *&);
 void ChooseRefBook(struct refbook *&, struct refbook *&, FILE *&, const char *&);
-void CloseFile(struct autoshow*&, FILE *&);
 
 #endif // MENU_H

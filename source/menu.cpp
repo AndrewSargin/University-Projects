@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <iostream>
+#include <stdlib.h>
 #include "menu.h"
 #include "IO.h"
 #include "editfile.h"
@@ -12,15 +11,15 @@ void MainMenu(struct refbook *pmade, struct refbook *pmodel, struct refbook *pcl
     while(1)
     {
         system("clear");
-        printf("ГЛАВНОЕ МЕНЮ\n");
-        printf(    "1.Файл\n"
-                   "2.Редактировать документ\n"
-                   "3.Вывести на экран документ\n"
-                   "4.Экспорт документа в файл txt\n"
-                   "5.Справочник\n"
-                   "6.О программе\n"
-                   "7.Выход");
-        printf("\nВведите номер пункта: ");
+        printf("ГЛАВНОЕ МЕНЮ\n"
+               "1.Файл\n"
+               "2.Редактировать документ\n"
+               "3.Вывести на экран документ\n"
+               "4.Экспорт документа в файл txt\n"
+               "5.Справочник\n"
+               "6.О программе\n"
+               "7.Выход\n\n"
+               "Введите номер пункта: ");
         scanf("%d", &n);
         switch(n)
         {
@@ -35,19 +34,17 @@ void MainMenu(struct refbook *pmade, struct refbook *pmodel, struct refbook *pcl
             {
                 printf("Открыт файл. Вы хотите сохранить изменения?\n"
                        "1.Да\n"
-                       "2.Нет\n"
-                       "Введите номер пункта:");
+                       "2.Нет\n\n"
+                       "Введите номер пункта: ");
                 scanf("%d", &n);
                 switch(n)
                 {
-                case 1: {
-                    SaveFile(pautoshow);
-                    CloseFile(pautoshow, in);
-                }; break;
-                case 2: CloseFile(pautoshow, in); break;
+                case 1: SaveFile(pautoshow); break;
+                case 2: break;
                 };
+                CloseFile(pautoshow, in);
             };
-            }; return;
+        }; return;
         };
     };
 }
@@ -57,10 +54,12 @@ void MenuFile(struct autoshow *&pautoshow, struct autoshow *&pendautoshow, FILE 
     while(1)
     {
         system("clear");
-        printf("ФАЙЛ\n");
-        printf("1.Открыть \n2.Сохранить \
-        \n3.Закрыть \n4.Назад \n");
-        printf("\nВведите номер пункта: ");
+        printf("ФАЙЛ\n"
+               "1.Открыть\n"
+               "2.Сохранить\n"
+               "3.Закрыть\n"
+               "4.Назад\n\n"
+               "Введите номер пункта: ");
         scanf("%d", &n);
         switch(n)
         {
@@ -80,28 +79,25 @@ void MenuEdit(struct refbook *&pmade, struct refbook *&pmodel, struct refbook *&
     while(1)
     {
         system("clear");
-        printf("МЕНЮ РЕДАКТИРОВАТЬ\n");
-        printf("1.Добавить запись \
-        \n2.Удалить запись \n3.Редактировать существующую запись \
-        \n4.Назад \n");
-        printf("\nВведите номер пункта: ");
+        printf("МЕНЮ РЕДАКТИРОВАТЬ\n"
+               "1.Добавить запись\n"
+               "2.Удалить запись\n"
+               "3.Редактировать существующую запись\n"
+               "4.Назад\n\n"
+               "Введите номер пункта: ");
         scanf("%d", &n);
         switch(n)
         {
         case 1: AddEntries(pmade, pmodel, pclass, pautoshow, pendautoshow, in, refbook); break;
         case 2: DeleteEntries(pautoshow, pendautoshow, in); break;
         case 3: EditExistingEntry(pmade, pmodel, pclass, pautoshow, in, refbook); break;
-        case 4:
-        {
+        case 4: {
             if(pmodel)
-                RefbookMemoryFree(pmodel);
-            pmodel=NULL;
+                pmodel=RefbookMemoryFree(pmodel);
             if(pmade)
-                RefbookMemoryFree(pmade);
-            pmade=NULL;
+                pmade=RefbookMemoryFree(pmade);
             if(pclass)
-                RefbookMemoryFree(pclass);
-            pclass=NULL;
+                pclass=RefbookMemoryFree(pclass);
         }; return;
         };
     };
@@ -121,11 +117,14 @@ void MenuRefBook(struct refbook*& pmade, struct refbook*& pmodel, struct refbook
     while(1)
     {
         system("clear");
-        printf("МЕНЮ СПРАВОЧНИК\n");
-        printf("1.Выбрать справочник \n2.Вывести на экран \
-        \n3.Редактировать запись в справочнике \n4.Добавить запись в справочник \
-        \n5.Удалить запись \n6.Назад \n");
-        printf("\nВведите номер пункта: ");
+        printf("МЕНЮ СПРАВОЧНИК\n"
+               "1.Выбрать справочник\n"
+               "2.Вывести на экран\n"
+               "3.Редактировать запись в справочнике\n"
+               "4.Добавить запись в справочник\n"
+               "5.Удалить запись\n"
+               "6.Назад\n\n"
+               "Введите номер пункта: ");
         scanf("%d", &n);
         switch(n)
         {
@@ -148,8 +147,8 @@ void ChooseRefBook(struct refbook *&pOpenedRefbook, struct refbook *&pendrefbook
                "1.made.db (Производитель)\n"
                "2.model.db (Название\\марка)\n"
                "3.class.db (Тип кузова)\n"
-               "4.Назад \n");
-        printf("\nВведите номер пункта: ");
+               "4.Назад\n\n"
+               "Введите номер пункта: ");
         scanf("%d", &n);
         switch(n)
         {
@@ -174,22 +173,4 @@ void ChooseRefBook(struct refbook *&pOpenedRefbook, struct refbook *&pendrefbook
         case 4: return;
         };
     };
-}
-
-void CloseFile(struct autoshow *&pautoshow, FILE *&in) {
-    system("clear");
-    if(!OpenCheck(in)) return;
-    fclose(in);
-    in=NULL;                            //это необходимо, чтобы после открытия и закрытия файла, после еще одного закрытия не было ошибки (программа вылетала)
-    while(pautoshow->next)   //закрытие файла
-    {
-        pautoshow=pautoshow->next;
-        free(pautoshow->previous);
-        pautoshow->previous=NULL;
-    };
-    pautoshow->next=NULL;
-    free(pautoshow);
-    pautoshow=NULL;
-    printf("Файл закрыт\n");
-    return;
 }

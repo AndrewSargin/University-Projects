@@ -1,11 +1,11 @@
 #include "technical.h"
 #include "structures.h"
-#include <iostream>
+#include <stdlib.h>
 
 void Pause() {
-    printf("Чтобы продолжить, нажмите Enter");
-    std::cin.ignore();
-    std::cin.get();
+    printf("Чтобы продолжить, нажмите Enter\n");
+    do getchar();
+    while(getchar()!='\n');
 }
 
 int OpenCheck(FILE *pfile) {
@@ -21,16 +21,33 @@ return 1;
 struct refbook* RefbookMemoryFree(struct refbook *pointer) {
     if(pointer)
     {
-        while(pointer->next)
+        struct refbook *pointer_2;
+        while(pointer)
         {
+            pointer_2=pointer;
             pointer=pointer->next;
-            pointer->previous->next=NULL;
-            free(pointer->previous);
-            pointer->previous=NULL;
+            pointer_2->next=NULL;
+            free(pointer_2);
+            pointer_2=NULL;
         };
-        pointer->next=NULL;
-        free(pointer);
-        pointer=NULL;
     }
     return pointer;
+}
+
+void CloseFile(struct autoshow *&pautoshow, FILE *&in) {
+    system("clear");
+    if(!OpenCheck(in)) return;
+    fclose(in);
+    in=NULL;                 //это необходимо, чтобы после открытия и закрытия файла, после еще одного закрытия не было ошибки (программа вылетала)
+    while(pautoshow->next)   //закрытие файла
+    {
+        pautoshow=pautoshow->next;
+        free(pautoshow->previous);
+        pautoshow->previous=NULL;
+    };
+    pautoshow->next=NULL;
+    free(pautoshow);
+    pautoshow=NULL;
+    printf("Файл закрыт\n");
+    return;
 }
