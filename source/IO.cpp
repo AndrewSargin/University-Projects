@@ -181,12 +181,9 @@ void PrintDoc(struct refbook *&pmade, struct refbook *&pmodel, struct refbook *&
         pprint->Power, pprint->EngineVolume,
         pprint->Class, BodyType, pprint->Price);
     };
-    RefbookMemoryFree(pmodel);
-    pmodel=NULL;
-    RefbookMemoryFree(pmade);
-    pmade=NULL;
-    RefbookMemoryFree(pclass);
-    pclass=NULL;
+    pmodel=RefbookMemoryFree(pmodel);
+    pmade=RefbookMemoryFree(pmade);
+    pclass=RefbookMemoryFree(pclass);
     Pause();
 }
 
@@ -284,12 +281,9 @@ void ExportToTxt(struct refbook *&pmade, struct refbook *&pmodel, struct refbook
         pprint->Class, BodyType, pprint->Price);
     };
     fclose(exportfile);
-    RefbookMemoryFree(pmodel);
-    pmodel=NULL;
-    RefbookMemoryFree(pmade);
-    pmade=NULL;
-    RefbookMemoryFree(pclass);
-    pclass=NULL;
+    pmodel=RefbookMemoryFree(pmodel);
+    pmade=RefbookMemoryFree(pmade);
+    pclass=RefbookMemoryFree(pclass);
     Pause();
 }
 
@@ -373,19 +367,14 @@ void RefbookSave(struct refbook*& pointer, FILE *&refbook, const char *&RefbookP
             if(pointer)
                 for(psave=pointer; psave!=0; psave=psave->next)
                     fprintf(refbook, "%d;%s;\n", psave->id, psave->RefData);
-            fclose(refbook);
-            refbook=NULL;
             printf("Изменения сохранены\n");
             Pause();
             break;
         }
-        case 2:
-        {
-            fclose(refbook);
-            refbook=NULL;
-            break;
-        };
+        case 2: break;
         }
+        fclose(refbook);
+        refbook=NULL;
     }
     return;
 }

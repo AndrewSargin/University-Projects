@@ -1,4 +1,4 @@
-1;42WRX452;VP3RET545;McLaren Automotive Ltd.;McLaren 720S;720;3994;S;купе;25800000;
+1;1;1;Ferrari NV;Ferrari Roma;1;1;1;хетчбэк;1;
 2;54TER555;NVM485;Aston Martin Ltd.;Aston Martin DB11;600;5204;S;купе;19500000;
 3;83UIX344;ORIW3456;Ferrari NV;Ferrari SF90 Stradale;1000;3990;S;купе;50000000;
 4;22NBM345;ERT3553;BMW AG;BMW 330i;258;1998;D;седан;2870000;
