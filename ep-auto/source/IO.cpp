@@ -293,7 +293,7 @@ void PrintRefBook(struct refbook *pOpenedRefbook, FILE *refbook) {
     if(!OpenCheck(refbook)) return;
     if(!pOpenedRefbook)
     {
-        printf("В справочнике нет записей");
+        printf("В справочнике нет записей\n");
         Pause();
         return;
     }
@@ -312,7 +312,7 @@ void OpenRefbook(struct refbook *&pointer, struct refbook *&pendrefbook, FILE *&
         Pause();
         return;
     }
-    pointer=RefbookRead(pointer, refbook);
+    if((pointer=RefbookRead(pointer, refbook))!=NULL)
     for(pendrefbook=pointer; pendrefbook->next!=0; pendrefbook=pendrefbook->next);
     printf("Справочник готов к работе\n");
     Pause();
