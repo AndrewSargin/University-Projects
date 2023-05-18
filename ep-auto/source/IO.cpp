@@ -175,7 +175,7 @@ void PrintDoc(struct refbook *&pmade, struct refbook *&pmodel, struct refbook *&
         }
         strncpy(BodyType, pointer->RefData, 40);
 
-        printf("%-5d %-15s %-15s %-35s %-25s %-5d %-5d %-5s %-12s %-20ld\n",
+        printf("%-5d %-15s %-15s %-30s %-25s %-5d %-5d %-5s %-12s %-20ld\n",
                 pprint->id, pprint->EngineNumber, pprint->BodyNubmer,
                 Manufacturer, Model, pprint->Power, pprint->EngineVolume,
                 pprint->Class, BodyType, pprint->Price);
@@ -273,7 +273,7 @@ void ExportToTxt(struct refbook *&pmade, struct refbook *&pmodel, struct refbook
         }
         strncpy(BodyType, pointer->RefData, 40);
 
-        fprintf(exportfile, "%-5d %-15s %-15s %-35s %-25s %-5d %-5d %-5s %-12s %-20ld\n", pprint->id,
+        fprintf(exportfile, "%-5d %-15s %-15s %-30s %-25s %-5d %-5d %-5s %-12s %-20ld\n", pprint->id,
         pprint->EngineNumber, pprint->BodyNubmer,
         Manufacturer, Model,
         pprint->Power, pprint->EngineVolume,
@@ -341,7 +341,8 @@ struct refbook* RefbookRead(struct refbook *pointer, FILE *refbook) {
 }
 
 void RefbookSave(struct refbook*& pointer, FILE *&refbook, const char *&RefbookPath) {
-    int n;
+    int i=1;
+    char n[10];
     struct refbook *psave;
     if(refbook)
     {
@@ -351,27 +352,30 @@ void RefbookSave(struct refbook*& pointer, FILE *&refbook, const char *&RefbookP
                "1.Да\n"
                "2.Нет\n"
                "Введите номер пункта:");
-        while (1)
+        while (i)
         {
-        scanf("%d", &n);
-        if(n==1 || n==2)
-            break;
+                scanf("%s", n);
+                switch(*n)
+                {
+                case '1':
+                {
+                    refbook=fopen(RefbookPath, "w+");
+                    system("clear");
+                    if(pointer)
+                        for(psave=pointer; psave!=0; psave=psave->next)
+                            fprintf(refbook, "%d;%s;\n", psave->id, psave->RefData);
+                    printf("Изменения сохранены\n");
+                    i=0;
+                    Pause();
+                    break;
+                }
+                case '2': {
+                    i=0;
+                    system("clear");
+                    Pause();
+                }; break;
+                };
         };
-        switch(n)
-        {
-        case 1:
-        {
-            refbook=fopen(RefbookPath, "w+");
-            system("clear");
-            if(pointer)
-                for(psave=pointer; psave!=0; psave=psave->next)
-                    fprintf(refbook, "%d;%s;\n", psave->id, psave->RefData);
-            printf("Изменения сохранены\n");
-            Pause();
-            break;
-        }
-        case 2: break;
-        }
         fclose(refbook);
         refbook=NULL;
     }
@@ -394,14 +398,14 @@ void About() {
 
 int ScanfNumericNoId(struct refbook* pointer, char* Text) {
     struct refbook *pscanr;
-    int i=1, Number, n;
+    int i=1, number, n;
     while(i)
     {
         n=2;
         printf("Введите %s: ", Text);
-        scanf("%d%*c", &Number);
-        for(pscanr=pointer; pscanr->next!=0 && pscanr->id!=Number; pscanr=pscanr->next);
-        if(pscanr->id!=Number)
+        scanf("%d%*c", &number);
+        for(pscanr=pointer; pscanr->next!=0 && pscanr->id!=number; pscanr=pscanr->next);
+        if(pscanr->id!=number)
         {
             printf("В справочнике нет записи с таким id\n");
             n=1;
@@ -412,19 +416,19 @@ int ScanfNumericNoId(struct refbook* pointer, char* Text) {
         case 2: i=0; break;
         }
     };
-    return Number;
+    return number;
 }
 
 int ScanfNumericId(struct refbook* pointer, char* Text) {
     struct refbook *pscanr;
-    int i=1, Number, n;
+    int i=1, number, n;
     while(i)
     {
         n=2;
         printf("Введите %s: ", Text);
-        scanf("%d%*c", &Number);
-        for(pscanr=pointer; pscanr->next!=0 && pscanr->id!=Number; pscanr=pscanr->next);
-        if(pscanr->id==Number)
+        scanf("%d%*c", &number);
+        for(pscanr=pointer; pscanr->next!=0 && pscanr->id!=number; pscanr=pscanr->next);
+        if(pscanr->id==number)
         {
             printf("В справочнике уже есть запсиь с таким id\n");
             n=1;
@@ -435,7 +439,7 @@ int ScanfNumericId(struct refbook* pointer, char* Text) {
         case 2: i=0; break;
         }
     };
-    return Number;
+    return number;
 }
 
 char* ScanfLiteral(struct refbook *pointer, char* data) {

@@ -1,11 +1,11 @@
-1     42WRX452        VP3RET545       McLaren Automotive Ltd.             McLaren 720S              720   3994  S     coupe        25800000            
-2     54TER555        NVM485          Aston Martin Ltd.                   Aston Martin DB11         600   5204  S     coupe        19500000            
-3     83UIX344        ORIW3456        Ferrari NV                          Ferrari SF90 Stradale     1000  3990  S     coupe        50000000            
-4     22NBM345        ERT3553         BMW AG                              BMW 330i                  258   1998  D     sedan        2870000             
-5     34REE3433       RYY3442         Honda Motor Co., Ltd                Honda Accord              192   1498  D     sedan        2180000             
-6     64ERT4223       LOP56332        Audi AG                             Audi Q8                   340   2995  E     SUV          6520000             
-7     80YEE5332       MVX3775         Porsche AG                          Porsche Panamera          690   4806  F     hatchback    5000000             
-8     49LJK5621       OTRP4004        Mercedes-Benz Group                 Mercedes-Benz AMG C63     670   3982  C     sedan        6500000             
-9     84IIE8864       OPEW34453       Automobili Lamborghini S.p.A.       Lamborghini Huracan       602   5204  S     coupe        12260000            
-10    94OPR3553       OREC3456        Honda Motor Co., Ltd                Honda Civic               240   2204  C     sedan        1500000             
-11    99IEI3443       OPE3453         Audi AG                             Audi RS7                  560   3993  C     hatchback    4600000             
+1     42WRX452        VP3RET545       McLaren Automotive Ltd.        McLaren 720S              720   3994  S     coupe        25800000            
+2     54TER555        NVM485          Aston Martin Ltd.              Aston Martin DB11         600   5204  S     coupe        19500000            
+3     83UIX344        ORIW3456        Ferrari NV                     Ferrari SF90 Stradale     1000  3990  S     coupe        50000000            
+4     22NBM345        ERT3553         BMW AG                         BMW 330i                  258   1998  D     sedan        2870000             
+5     34REE3433       RYY3442         Honda Motor Co., Ltd           Honda Accord              192   1498  D     sedan        2180000             
+6     64ERT4223       LOP56332        Audi AG                        Audi Q8                   340   2995  E     SUV          6520000             
+7     80YEE5332       MVX3775         Porsche AG                     Porsche Panamera          690   4806  F     hatchback    5000000             
+8     49LJK5621       OTRP4004        Mercedes-Benz Group            Mercedes-Benz AMG C63     670   3982  C     sedan        6500000             
+9     84IIE8864       OPEW34453       Automobili Lamborghini S.p.A.  Lamborghini Huracan       602   5204  S     coupe        12260000            
+10    94OPR3553       OREC3456        Honda Motor Co., Ltd           Honda Civic               240   2204  C     sedan        1500000             
+11    99IEI3443       OPE3453         Audi AG                        Audi RS7                  560   3993  C     hatchback    4600000             
