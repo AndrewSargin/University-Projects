@@ -175,11 +175,10 @@ void PrintDoc(struct refbook *&pmade, struct refbook *&pmodel, struct refbook *&
         }
         strncpy(BodyType, pointer->RefData, 40);
 
-        printf("%d;%s;%s;%s;%s;%d;%d;%s;%s;%ld;\n", pprint->id,
-        pprint->EngineNumber, pprint->BodyNubmer,
-        Manufacturer, Model,
-        pprint->Power, pprint->EngineVolume,
-        pprint->Class, BodyType, pprint->Price);
+        printf("%-5d %-15s %-15s %-35s %-25s %-5d %-5d %-5s %-12s %-20ld\n",
+                pprint->id, pprint->EngineNumber, pprint->BodyNubmer,
+                Manufacturer, Model, pprint->Power, pprint->EngineVolume,
+                pprint->Class, BodyType, pprint->Price);
     };
     pmodel=RefbookMemoryFree(pmodel);
     pmade=RefbookMemoryFree(pmade);
@@ -274,7 +273,7 @@ void ExportToTxt(struct refbook *&pmade, struct refbook *&pmodel, struct refbook
         }
         strncpy(BodyType, pointer->RefData, 40);
 
-        fprintf(exportfile, "%d;%s;%s;%s;%s;%d;%d;%s;%s;%ld;\n", pprint->id,
+        fprintf(exportfile, "%-5d %-15s %-15s %-35s %-25s %-5d %-5d %-5s %-12s %-20ld\n", pprint->id,
         pprint->EngineNumber, pprint->BodyNubmer,
         Manufacturer, Model,
         pprint->Power, pprint->EngineVolume,
