@@ -7,7 +7,7 @@
 
 void MainMenu(struct refbook *pmade, struct refbook *pmodel, struct refbook *pclass, struct autoshow *pautoshow, struct autoshow *pendautoshow, FILE *in, FILE *refbook)
 {
-    int n=0;
+    char n[10];
     while(1)
     {
         system("clear");
@@ -20,27 +20,27 @@ void MainMenu(struct refbook *pmade, struct refbook *pmodel, struct refbook *pcl
                "6.О программе\n"
                "7.Выход\n\n"
                "Введите номер пункта: ");
-        scanf("%d", &n);
-        switch(n)
+        scanf("%s", n);
+        switch(*n)
         {
-        case 1: MenuFile(pautoshow, pendautoshow, in); break;
-        case 2: MenuEdit(pmade, pmodel, pclass, pautoshow, pendautoshow, in, refbook); break;
-        case 3: PrintDoc(pmade, pmodel, pclass, pautoshow, in, refbook); break;
-        case 4: ExportToTxt(pmade, pmodel, pclass, pautoshow, in, refbook); break;
-        case 5: MenuRefBook(pmade, pmodel, pclass, refbook); break;
-        case 6: About(); break;
-        case 7: {
+        case '1': MenuFile(pautoshow, pendautoshow, in); break;
+        case '2': MenuEdit(pmade, pmodel, pclass, pautoshow, pendautoshow, in, refbook); break;
+        case '3': PrintDoc(pmade, pmodel, pclass, pautoshow, in, refbook); break;
+        case '4': ExportToTxt(pmade, pmodel, pclass, pautoshow, in, refbook); break;
+        case '5': MenuRefBook(pmade, pmodel, pclass, refbook); break;
+        case '6': About(); break;
+        case '7': {
             if(in)
             {
                 printf("Открыт файл. Вы хотите сохранить изменения?\n"
                        "1.Да\n"
                        "2.Нет\n\n"
                        "Введите номер пункта: ");
-                scanf("%d", &n);
-                switch(n)
+                scanf("%s", n);
+                switch(*n)
                 {
-                case 1: SaveFile(pautoshow); break;
-                case 2: break;
+                case '1': SaveFile(pautoshow); break;
+                case '2': break;
                 };
                 CloseFile(pautoshow, in);
             };
@@ -50,7 +50,7 @@ void MainMenu(struct refbook *pmade, struct refbook *pmodel, struct refbook *pcl
 }
 
 void MenuFile(struct autoshow *&pautoshow, struct autoshow *&pendautoshow, FILE *&in) {
-    int n;
+    char n[10];
     while(1)
     {
         system("clear");
@@ -60,22 +60,22 @@ void MenuFile(struct autoshow *&pautoshow, struct autoshow *&pendautoshow, FILE 
                "3.Закрыть\n"
                "4.Назад\n\n"
                "Введите номер пункта: ");
-        scanf("%d", &n);
-        switch(n)
+        scanf("%s", n);
+        switch(*n)
         {
-        case 1: OpenFile(pautoshow, pendautoshow, in); break;
-        case 2: SaveFile(pautoshow); break;
-        case 3: {
+        case '1': OpenFile(pautoshow, pendautoshow, in); break;
+        case '2': SaveFile(pautoshow); break;
+        case '3': {
             CloseFile(pautoshow, in);
             Pause();
         }; break;
-        case 4: return;
+        case '4': return;
         };
     };
 }
 
 void MenuEdit(struct refbook *&pmade, struct refbook *&pmodel, struct refbook *&pclass, struct autoshow *&pautoshow, struct autoshow *&pendautoshow, FILE *&in, FILE *&refbook) {
-    int n;
+    char n[10];
     while(1)
     {
         system("clear");
@@ -85,13 +85,13 @@ void MenuEdit(struct refbook *&pmade, struct refbook *&pmodel, struct refbook *&
                "3.Редактировать существующую запись\n"
                "4.Назад\n\n"
                "Введите номер пункта: ");
-        scanf("%d", &n);
-        switch(n)
+        scanf("%s", n);
+        switch(*n)
         {
-        case 1: AddEntries(pmade, pmodel, pclass, pautoshow, pendautoshow, in, refbook); break;
-        case 2: DeleteEntries(pautoshow, pendautoshow, in); break;
-        case 3: EditExistingEntry(pmade, pmodel, pclass, pautoshow, in, refbook); break;
-        case 4: {
+        case '1': AddEntries(pmade, pmodel, pclass, pautoshow, pendautoshow, in, refbook); break;
+        case '2': DeleteEntries(pautoshow, pendautoshow, in); break;
+        case '3': EditExistingEntry(pmade, pmodel, pclass, pautoshow, in, refbook); break;
+        case '4': {
             if(pmodel)
                 pmodel=RefbookMemoryFree(pmodel);
             if(pmade)
@@ -104,7 +104,7 @@ void MenuEdit(struct refbook *&pmade, struct refbook *&pmodel, struct refbook *&
 }
 
 void MenuRefBook(struct refbook*& pmade, struct refbook*& pmodel, struct refbook*& pclass, FILE *&refbook) {
-    int n;
+    char n[10];
     system("clear");
     struct refbook *pOpenedRefbook=0, *pendrefbook=0;
     const char *RefbookPath;
@@ -125,21 +125,21 @@ void MenuRefBook(struct refbook*& pmade, struct refbook*& pmodel, struct refbook
                "5.Удалить запись\n"
                "6.Назад\n\n"
                "Введите номер пункта: ");
-        scanf("%d", &n);
-        switch(n)
+        scanf("%s", n);
+        switch(*n)
         {
-        case 1: ChooseRefBook(pOpenedRefbook, pendrefbook, refbook, RefbookPath); break;
-        case 2: PrintRefBook(pOpenedRefbook, refbook); break;
-        case 3: EditEntryRefBook(pOpenedRefbook, refbook); break;
-        case 4: AddEntryRefBook(pOpenedRefbook, pendrefbook, refbook); break;
-        case 5: DeleteEntryRefBook(pOpenedRefbook, pendrefbook, refbook); break;
-        case 6: RefbookSave(pOpenedRefbook, refbook, RefbookPath); return;
+        case '1': ChooseRefBook(pOpenedRefbook, pendrefbook, refbook, RefbookPath); break;
+        case '2': PrintRefBook(pOpenedRefbook, refbook); break;
+        case '3': EditEntryRefBook(pOpenedRefbook, refbook); break;
+        case '4': AddEntryRefBook(pOpenedRefbook, pendrefbook, refbook); break;
+        case '5': DeleteEntryRefBook(pOpenedRefbook, pendrefbook, refbook); break;
+        case '6': RefbookSave(pOpenedRefbook, refbook, RefbookPath); return;
         }
     };
 }
 
 void ChooseRefBook(struct refbook *&pOpenedRefbook, struct refbook *&pendrefbook, FILE *&refbook, const char *&RefbookPath) {
-    int n;
+    char n[10];
     while(1)
     {
         system("clear");
@@ -149,28 +149,28 @@ void ChooseRefBook(struct refbook *&pOpenedRefbook, struct refbook *&pendrefbook
                "3.class.db (Тип кузова)\n"
                "4.Назад\n\n"
                "Введите номер пункта: ");
-        scanf("%d", &n);
-        switch(n)
+        scanf("%s", n);
+        switch(*n)
         {
-        case 1:
+        case '1':
         {
             RefbookSave(pOpenedRefbook, refbook, RefbookPath);  //сохранение изменений, если был открыт какой-то справочник
             RefbookPath="../ep-auto/DB/made.db";
             OpenRefbook(pOpenedRefbook, pendrefbook, refbook, RefbookPath);
         }; break;
-        case 2:
+        case '2':
         {
             RefbookSave(pOpenedRefbook, refbook, RefbookPath);  //сохранение изменений, если был открыт какой-то справочник
             RefbookPath="../ep-auto/DB/model.db";
             OpenRefbook(pOpenedRefbook, pendrefbook, refbook, RefbookPath);
         }; break;
-        case 3:
+        case '3':
         {
             RefbookSave(pOpenedRefbook, refbook, RefbookPath);  //сохранение изменений, если был открыт какой-то справочник
             RefbookPath="../ep-auto/DB/class.db";
             OpenRefbook(pOpenedRefbook, pendrefbook, refbook, RefbookPath);
         }; break;
-        case 4: return;
+        case '4': return;
         };
     };
 }

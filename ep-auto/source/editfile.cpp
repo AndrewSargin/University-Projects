@@ -154,7 +154,7 @@ void AddEntries(struct refbook *&pmade, struct refbook *&pmodel, struct refbook 
 
 void DeleteEntries(struct autoshow *&pautoshow, struct autoshow *& pendautoshow, FILE *in) {
     struct autoshow *pscan;
-    int n;
+    int id;
     system("clear");
     if(!OpenCheck(in)) return;  //Проверка на то, что файл открыт
     if(pautoshow==NULL) //проверка на то, что список сформирован
@@ -164,9 +164,9 @@ void DeleteEntries(struct autoshow *&pautoshow, struct autoshow *& pendautoshow,
         return;
     };
     printf("Введите id записи, которую нужно удалить: ");
-    scanf("%d", &n);
-    for(pscan=pautoshow; pscan->id!=n && pscan->next; pscan=pscan->next);
-    if (pscan->id!=n)
+    scanf("%d", &id);
+    for(pscan=pautoshow; pscan->id!=id && pscan->next; pscan=pscan->next);
+    if (pscan->id!=id)
     {
         printf("В файле нет записи с введенным id\n");
         Pause();
@@ -362,7 +362,7 @@ void AddEntryRefBook(struct refbook *&pOpenedrefbook, struct refbook *&pendrefbo
 }
 void DeleteEntryRefBook(struct refbook *&pOpenedRefbook, struct refbook *&pendrefbook, FILE *refbook) {
     struct refbook *pscan;
-    int n;
+    int id;
     system("clear");
     if(!OpenCheck(refbook)) return;
     if(pOpenedRefbook==NULL) //проверка на то, что список сформирован
@@ -372,9 +372,9 @@ void DeleteEntryRefBook(struct refbook *&pOpenedRefbook, struct refbook *&pendre
         return;
     };
     printf("Введите id записи, которую нужно удалить: ");
-    scanf("%d", &n);
-    for(pscan=pOpenedRefbook; pscan->id!=n && pscan->next; pscan=pscan->next);
-    if (pscan->id!=n)
+    scanf("%d", &id);
+    for(pscan=pOpenedRefbook; pscan->id!=id && pscan->next; pscan=pscan->next);
+    if (pscan->id!=id)
     {
         printf("В файле нет записи с введенным id\n");
         Pause();
